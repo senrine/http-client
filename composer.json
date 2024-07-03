@@ -1,0 +1,17 @@
+{
+    "name": "nesrine/http-client",
+    "autoload": {
+        "psr-4": {
+            "Nesrine\\HttpClient\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Senrine",
+            "email": "saadinesrine16@gmail.com"
+        }
+    ],
+    "require": {
+      "ext-curl": "*"
+    }
+}
