@@ -11,11 +11,11 @@ try {
     $options = ['headers' => ['Content-Type: application/json'], 'body' => ''];
     $client->get('https://jsonplaceholder.typicode.com/todos/1', $options);
     $response = $client->send();
+    echo "Status Code: " . $response->getStatusCode() . "\n";
+    echo "Body: " . $response->getBody() . "\n\n";
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-echo "Status Code: " . $response->getStatusCode() . "\n";
-echo "Body: " . $response->getBody() . "\n\n";
 
 echo "Test POST request:\n";
 try {
@@ -24,11 +24,11 @@ try {
 
     $client->post('https://jsonplaceholder.typicode.com/posts', $data, $options);
     $response = $client->send();
+    echo "Status Code: " . $response->getStatusCode() . "\n";
+    echo "Body: " . $response->getBody() . "\n\n";
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-echo "Status Code: " . $response->getStatusCode() . "\n";
-echo "Body: " . $response->getBody() . "\n\n";
 
 echo "Test PUT request:\n";
 try {
@@ -37,11 +37,11 @@ try {
 
     $client->put('https://jsonplaceholder.typicode.com/posts/1', $data, $options);
     $response = $client->send();
+    echo "Status Code: " . $response->getStatusCode() . "\n";
+    echo "Body: " . $response->getBody() . "\n\n";
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-echo "Status Code: " . $response->getStatusCode() . "\n";
-echo "Body: " . $response->getBody() . "\n\n";
 
 echo "Test DELETE request:\n";
 try {
@@ -50,8 +50,8 @@ try {
 
     $client->delete('https://jsonplaceholder.typicode.com/posts/1', $data, $options);
     $response = $client->send();
+    echo "Status Code: " . $response->getStatusCode() . "\n";
+    echo "Body: " . $response->getBody() . "\n\n";
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-echo "Status Code: " . $response->getStatusCode() . "\n";
-echo "Body: " . $response->getBody() . "\n\n";

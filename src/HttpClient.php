@@ -2,7 +2,6 @@
 
 namespace Nesrine\HttpClient;
 
-use Exception;
 use Nesrine\HttpClient\Request\RequestInterface;
 use Nesrine\HttpClient\Response\ResponseInterface;
 use Nesrine\HttpClient\Response\Response;
@@ -27,6 +26,10 @@ class HttpClient{
 
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if($response === false){
+            throw new \Exception("Curl error: " . curl_error($ch));
+        }
 
         curl_close($ch);
         return new Response($response, $httpCode);
@@ -86,11 +89,20 @@ class HttpClient{
         }
     }
 
-    public function delete($url, $data = null, $options = []): void{
+    public function delete($url, $data, $options = []): void{
         $this->options['method'] = 'DELETE';
         $this->options['url'] = $url;
         $this->options['headers'] = $options['headers'];
-        $this->options['body'] = $options['body'];
+        $this->options['body'] = json_encode($data);
 
+        try {
+            $this->currentRequest = new Request();
+            $this->currentRequest->setMethod($this->options['method'])
+                ->setUrl($this->options['url'])
+                ->setHeaders($this->options['headers'])
+                ->setBody($this->options['body']);
+        }catch(\Exception $e){
+            echo $e->getMessage();
+        }
     }
 }
