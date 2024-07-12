@@ -18,7 +18,6 @@ class HttpClient{
     public function send(): ResponseInterface
     {
 
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->currentRequest->getUrl());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -52,21 +51,39 @@ class HttpClient{
 
     }
 
-    public function post($url, $data = null, $options = []): void
+    public function post($url, $data, $options = []): void
     {
         $this->options['method'] = 'POST';
         $this->options['url'] = $url;
-        $this->options['headers'] = $options['headers'];
-        $this->options['body'] = $options['body'];
+        $this->options['headers'] = $options['headers'] ?? [];
+        $this->options['body'] = json_encode($data);
 
+        try {
+            $this->currentRequest = new Request();
+            $this->currentRequest->setMethod($this->options['method'])
+                ->setUrl($this->options['url'])
+                ->setHeaders($this->options['headers'])
+                ->setBody($this->options['body']);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
-    public function put($url, $data = null, $options = []): void{
+    public function put($url, $data, $options = []): void{
         $this->options['method'] = 'PUT';
         $this->options['url'] = $url;
         $this->options['headers'] = $options['headers'];
-        $this->options['body'] = $options['body'];
+        $this->options['body'] = json_encode($data);
 
+        try {
+            $this->currentRequest = new Request();
+            $this->currentRequest->setMethod($this->options['method'])
+                ->setUrl($this->options['url'])
+                ->setHeaders($this->options['headers'])
+                ->setBody($this->options['body']);
+        }catch(\Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     public function delete($url, $data = null, $options = []): void{
