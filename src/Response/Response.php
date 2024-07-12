@@ -4,26 +4,26 @@ namespace Nesrine\HttpClient\Response;
 
 class Response implements ResponseInterface
 {
-    private $response;
-    private $httpCode;
+    private string $response;
+    private int $httpCode;
 
-    public function __construct($response, $httpCode)
+    public function __construct(string $response, int $httpCode)
     {
         $this->response = $response;
         $this->httpCode = $httpCode;
     }
 
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->httpCode;
     }
 
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return [];
     }
 
-    public function getBody()
+    public function getBody(): string
     {
         return $this->response;
     }
